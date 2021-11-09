@@ -315,7 +315,7 @@ if __name__ == '__main__':
     # data arguments
     parser.add_argument('--dataset', type=str,
                             choices=['ml1m', 'gowalla', 'lastfm'], default='ml1m')
-    parser.add_argument('--data_root', type=str, default='SRAR/data/')
+    parser.add_argument('--data_root', type=str, default='AR/data/')
     parser.add_argument('--train_dir', type=str, default='/test/train.txt')
     parser.add_argument('--test_dir', type=str, default='/test/test.txt')
     parser.add_argument('--L', type=int, default=5)
