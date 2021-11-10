@@ -1,5 +1,5 @@
 # Modelling Skip-Behaviors in Sequence-Aware Recommender Systems
-Sequential Recommender Systems (SRSs) operate on sequences of items as inputs. If the sequences contain noisy items, SRS will produce a sub-optimal performance as noise may dilute the signal captured by the model. The project is aimed to improve the performance of SRS in two ways: 1) to model relationships between non-adjacent items (skip-behaviors) to account for heterogeneous sequences 2) to introduce noise-filtering techniques to mitigate the impact of noise on sequences. In particular, two models are proposed: Sequential Recommender with Association Rules (SRAR) uses assocition rules to filter out noisy data; Sequential Recommender with Attention integrates an attention mechanism to detect and deactivate the embeddigns of irrelevant items. 
+Sequential Recommender Systems (SRSs) operate on sequences of items as inputs. If the sequences contain noisy items, SRS will produce a sub-optimal performance as noise may dilute the signal captured by the model. The project is aimed to improve the performance of SRS in two ways: 1) to model relationships between non-adjacent items (skip-behaviors) to account for heterogeneous sequences 2) to introduce noise-filtering techniques to mitigate the impact of noise on sequences. In particular, two models are proposed: Sequential Recommender with Association Rules (SRAR) uses assocition rules to filter out noisy data; Sequential Recommender with Attention (SRAttn) integrates an attention mechanism to detect and deactivate the embeddigns of irrelevant items. 
 
 # Requirements
 - Python 3
@@ -7,13 +7,19 @@ Sequential Recommender Systems (SRSs) operate on sequences of items as inputs. I
 
 # Training
 The default hyperparameters are optimal for the MovieLens dataset. In order to get the reported performance on Gowalla, the following hyperparameters should be changed:
+
 `python train.py SRAR --dataset=gowalla --d=100 --fc_dim=50 --l2=1e-6 --min_support=9e-5 --min_threshold=0.0366`
+
 `python train.py SRAttn --dataset=gowalla --d=100 --fc_dim=50 --l2=1e-6 --num_heads=5`
+
 Last.fm hyperparameters:
+
 `python train.py SRAR --dataset=lastfm --learning_rate=0.002 --d=200 --fc_dim=50 --l2=5e-6 --num_heads=25`
 
-**Important:** for the Last.fm dataset a restricting condition *if p not in rated* should be removed in `evaluation.py`:
+**Important:** for the Last.fm dataset, a restricting condition `if p not in rated` should be removed in `evaluation.py`:
+
 `predictions = [p for p in predictions if p not in rated] `
+
 Since the dataset contains many repetitions, the model is allowed to recommend items that are present in the training set. 
 
 # Datasets 
